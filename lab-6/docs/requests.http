@@ -1,0 +1,14 @@
+### Создать студента
+POST http://localhost:8080/api/students
+Content-Type: application/json
+
+{"name":"Анна","surname":"Иванова","faculty":"ИРИТ-РТФ","age":20}
+
+### Список студентов
+GET http://localhost:8080/api/students
+
+### Создать дисциплину
+POST http://localhost:8080/api/subjects
+Content-Type: application/json
+
+{"code":"CS-101","name":"Программирование","hours":72}
