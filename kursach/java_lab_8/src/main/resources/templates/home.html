@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Книжный каталог</title>
+<link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body><main class="container narrow"><div class="card"><span class="eyebrow">Spring Boot • Курсовой проект</span>
+<h1>Книжный каталог</h1><p>Вариант № 1: книги, книжные магазины, цены и расчёт стоимости.</p>
+<p>Управление книгами с авторизацией, ролями и журналом действий.</p>
+<div sec:authorize="isAnonymous()"><a class="button" th:href="@{/login}">Войти</a> <a th:href="@{/register}">Зарегистрироваться</a></div>
+<div sec:authorize="isAuthenticated()"><a class="button" th:href="@{/books}">Открыть каталог</a>
+<a th:href="@{/about}">О проекте</a>
+<form th:action="@{/logout}" method="post"><button class="link danger" type="submit">Выйти</button></form></div>
+</div></main></body></html>

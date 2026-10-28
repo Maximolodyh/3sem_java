@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Книги — Книжный каталог</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body><main class="container"><div th:replace="~{fragments :: nav}"></div>
+
+<header><div><h1>Книги</h1><p>Вариант № 1: каталог книг и их авторов</p></div>
+<a class="button" sec:authorize="hasAnyRole('USER','ADMIN')" th:href="@{/books/new}">Добавить книгу</a></header>
+<p sec:authorize="hasRole('READ_ONLY')">Роль READ_ONLY: доступен только просмотр.</p>
+<div class="table-wrap"><table><thead><tr><th>Название</th><th>Автор</th><th>Год выпуска</th><th sec:authorize="hasAnyRole('USER','ADMIN')">Действия</th></tr></thead>
+<tbody><tr th:each="b: ${books}"><td th:text="${b.title}"></td><td th:text="${b.author}"></td><td th:text="${b.publicationYear}"></td>
+<td sec:authorize="hasAnyRole('USER','ADMIN')" class="actions"><a th:href="@{/books/{id}/edit(id=${b.id})}">Изменить</a>
+<form th:action="@{/books/{id}/delete(id=${b.id})}" method="post"><button class="link danger" type="submit">Удалить</button></form></td></tr>
+<tr th:if="${#lists.isEmpty(books)}"><td colspan="4">Книг пока нет.</td></tr></tbody></table></div>
+
+</main></body></html>

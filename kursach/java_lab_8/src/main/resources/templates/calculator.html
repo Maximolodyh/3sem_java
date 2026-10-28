@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Калькулятор — Книжный каталог</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body><main class="container"><div th:replace="~{fragments :: nav}"></div>
+
+<header><div><h1>Калькулятор стоимости</h1><p>Выберите предложение и укажите количество экземпляров</p></div></header>
+<form class="card narrow" th:action="@{/calculator}" method="post">
+<label>Предложение<select name="priceId" required>
+<option value="">Выберите книгу и магазин</option>
+<option th:each="p: ${prices}" th:value="${p.id}"
+ th:selected="${priceId != null and priceId == p.id}"
+ th:text="${p.book.title + ' / ' + p.store.name + ' — ' + p.price + ' ₽'}"></option></select></label>
+<label>Количество книг<input type="number" name="quantity" min="1" max="10000" th:value="${quantity ?: 1}" required></label>
+<button class="button" type="submit">Рассчитать стоимость</button></form>
+<p class="alert" th:if="${error}" th:text="${error}"></p>
+<div class="card narrow result" th:if="${result != null}"><strong>Итоговая стоимость:</strong><h2 th:text="${result + ' ₽'}"></h2></div>
+
+</main></body></html>

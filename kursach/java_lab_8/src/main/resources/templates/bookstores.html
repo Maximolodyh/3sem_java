@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Книжные магазины — Книжный каталог</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body><main class="container"><div th:replace="~{fragments :: nav}"></div>
+
+<header><div><h1>Книжные магазины</h1><p>Адреса магазинов и связанные предложения</p></div>
+<a class="button" sec:authorize="hasAnyRole('USER','ADMIN')" th:href="@{/bookstores/new}">Добавить магазин</a></header>
+<div class="table-wrap"><table><thead><tr><th>Название</th><th>Адрес</th><th sec:authorize="hasAnyRole('USER','ADMIN')">Действия</th></tr></thead>
+<tbody><tr th:each="s: ${stores}"><td th:text="${s.name}"></td><td th:text="${s.address}"></td>
+<td sec:authorize="hasAnyRole('USER','ADMIN')" class="actions"><a th:href="@{/bookstores/{id}/edit(id=${s.id})}">Изменить</a>
+<form th:action="@{/bookstores/{id}/delete(id=${s.id})}" method="post"><button class="link danger" type="submit">Удалить</button></form></td></tr>
+<tr th:if="${#lists.isEmpty(stores)}"><td colspan="3">Магазинов пока нет.</td></tr></tbody></table></div>
+
+</main></body></html>

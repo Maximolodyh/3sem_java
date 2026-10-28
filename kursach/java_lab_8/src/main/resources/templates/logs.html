@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Журнал действий — Книжный каталог</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body><main class="container"><div th:replace="~{fragments :: nav}"></div>
+
+<header><div><h1>Журнал действий</h1><p>Последние 100 записей из таблицы user_actions; также ведётся файл logs/coursework.log</p></div></header>
+<div class="table-wrap"><table><thead><tr><th>Время</th><th>Пользователь</th><th>Действие</th></tr></thead>
+<tbody><tr th:each="entry: ${actions}"><td th:text="${#temporals.format(entry.dateActions, 'dd.MM.yyyy HH:mm:ss')}"></td>
+<td th:text="${entry.username}"></td><td th:text="${entry.description}"></td></tr>
+<tr th:if="${#lists.isEmpty(actions)}"><td colspan="3">Действий пока нет.</td></tr></tbody></table></div>
+
+</main></body></html>

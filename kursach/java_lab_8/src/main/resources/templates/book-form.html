@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Редактор книги — Книжный каталог</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body><main class="container"><div th:replace="~{fragments :: nav}"></div>
+
+<a th:href="@{/books}">← К книгам</a><h1>Редактор книги</h1>
+<form class="card narrow" th:action="${action}" th:object="${bookForm}" method="post">
+<label>Название<input th:field="*{title}" required maxlength="200"></label><span class="error" th:errors="*{title}"></span>
+<label>Автор<input th:field="*{author}" required maxlength="150"></label><span class="error" th:errors="*{author}"></span>
+<label>Год издания<input type="number" th:field="*{publicationYear}" min="1000" max="2100" required></label><span class="error" th:errors="*{publicationYear}"></span>
+<button class="button" type="submit">Сохранить</button>
+</form>
+
+</main></body></html>

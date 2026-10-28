@@ -1,0 +1,21 @@
+### Публичное состояние
+GET http://localhost:8080/actuator/health
+
+### Анонимный API получает 401
+GET http://localhost:8080/api/students
+
+### Защищённые запросы
+# Сначала войдите через http://localhost:8080/login. Для POST/PUT/DELETE
+# HTTP-клиент должен сохранить JSESSIONID и передать X-CSRF-TOKEN со
+# значением токена из скрытого поля _csrf HTML-формы. Глобального
+# отключения CSRF для API нет.
+
+### После аутентификации USER: чтение
+GET http://localhost:8080/api/students
+
+### После аутентификации EDITOR/ADMIN + CSRF
+POST http://localhost:8080/api/students
+Content-Type: application/json
+X-CSRF-TOKEN: <токен из HTML>
+
+{"name":"Анна","surname":"Иванова","faculty":"ИРИТ-РТФ","age":20,"groupId":null}

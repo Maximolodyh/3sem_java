@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Назначение ролей — Книжный каталог</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body><main class="container"><div th:replace="~{fragments :: nav}"></div>
+
+<header><div><h1>Пользователи и роли</h1><p>По умолчанию при регистрации назначается READ_ONLY</p></div></header>
+<p th:if="${message}" th:text="${message}"></p><p class="alert" th:if="${error}" th:text="${error}"></p>
+<div class="table-wrap"><table><thead><tr><th>Имя</th><th>Email</th><th>Активен</th><th>Роли</th><th>Выдать роль</th></tr></thead>
+<tbody><tr th:each="u:${users}"><td th:text="${u.firstName+' '+u.lastName}"></td>
+<td th:text="${u.email}"></td><td th:text="${u.active ? 'да' : 'нет'}"></td>
+<td><span th:each="r:${u.roles}" th:text="${r.name+' '}" class="role"></span></td>
+<td><form method="post" th:action="@{/users/{id}/roles(id=${u.id})}" class="inline-form">
+<select name="role"><option value="USER">USER</option><option value="ADMIN">ADMIN</option></select>
+<button class="button" type="submit">Назначить</button></form></td></tr></tbody></table></div>
+
+</main></body></html>

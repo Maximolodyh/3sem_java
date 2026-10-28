@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>О приложении — Книжный каталог</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body><main class="container"><div th:replace="~{fragments :: nav}"></div>
+
+<header><div><h1>О приложении</h1><p>Курсовой проект по Spring Boot — вариант № 1</p></div></header>
+<section class="card"><h2>Книжный каталог</h2>
+<p>Приложение предназначено для хранения списка книг, книжных магазинов и цен на книги.</p>
+<p><strong>Технологии:</strong> Java 17, Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Thymeleaf, H2, Actuator.</p>
+<p><strong>Разработчик:</strong> укажите своё ФИО, учебную группу и год при подготовке пояснительной записки.</p>
+<p><strong>Безопасность:</strong> пароль сохраняется в виде BCrypt-хеша; данные изменяют только авторизованные пользователи с соответствующими правами.</p></section>
+
+</main></body></html>

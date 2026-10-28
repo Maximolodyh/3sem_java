@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+<nav th:fragment="nav" class="site-nav">
+  <a class="brand" th:href="@{/}">Книжный каталог</a>
+  <a th:href="@{/books}">Книги</a>
+  <a th:href="@{/bookstores}">Магазины</a>
+  <a th:href="@{/prices}">Цены</a>
+  <a th:href="@{/calculator}">Калькулятор</a>
+  <a th:href="@{/about}">О приложении</a>
+  <a sec:authorize="hasAnyRole('USER','EDITOR','ADMIN')" th:href="@{/students}">Студенты (старый модуль)</a>
+  <a sec:authorize="hasRole('ADMIN')" th:href="@{/users}">Роли</a>
+  <a sec:authorize="hasRole('ADMIN')" th:href="@{/logs}">Логи</a>
+  <form th:action="@{/logout}" method="post"><button class="link danger" type="submit">Выйти</button></form>
+</nav>
+</body></html>

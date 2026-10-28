@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Редактор цены — Книжный каталог</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body><main class="container"><div th:replace="~{fragments :: nav}"></div>
+
+<a th:href="@{/prices}">← К ценам</a><h1>Цена книги в магазине</h1>
+<p>Выберите книгу и магазин. Для каждой пары хранится одна цена.</p>
+<form class="card narrow" th:action="${action}" th:object="${priceForm}" method="post">
+<p class="alert" th:if="${#fields.hasGlobalErrors()}" th:each="e : ${#fields.globalErrors()}" th:text="${e}"></p>
+<label>Книга<select th:field="*{bookId}" required><option value="">Выберите книгу</option>
+<option th:each="b: ${books}" th:value="${b.id}" th:text="${b.title + ' — ' + b.author}"></option></select></label>
+<span class="error" th:errors="*{bookId}"></span>
+<label>Магазин<select th:field="*{storeId}" required><option value="">Выберите магазин</option>
+<option th:each="s: ${stores}" th:value="${s.id}" th:text="${s.name}"></option></select></label>
+<span class="error" th:errors="*{storeId}"></span>
+<label>Цена (₽)<input type="number" step="0.01" min="0.01" th:field="*{price}" required></label>
+<span class="error" th:errors="*{price}"></span>
+<button class="button" type="submit">Сохранить цену</button></form>
+
+</main></body></html>
